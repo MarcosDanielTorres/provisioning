@@ -16,6 +16,7 @@
         - rust
         - tmux
         - nvim
+        - go
   tasks:
     - name: "Include core tasks"
       include_tasks: 
@@ -58,3 +59,8 @@
       tags:
         - nvim
 
+    - name: "Include Go"
+      include_tasks:
+        file: tasks/go.yml
+      tags:
+        - go
