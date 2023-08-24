@@ -15,6 +15,12 @@
 - name: Install System Packages 3 (the rest)
   become: true
   apt:
-    name: [ "compton", "curl", "htop",  "lsof", "ccache","python3-pip", "moreutils", "clangd", "ripgrep", "fzf"]
+    name: [ "compton", "curl", "htop",  "lsof", "ccache","python3-pip", "moreutils", "clangd", "ripgrep", "fzf", "nvidia-settings"]
+  tags:
+    - core
+
+- name: Install GCM (Git Credentials Manager)
+  become: true
+  shell: wget https://github.com/git-ecosystem/git-credential-manager/releases/download/v2.3.2/gcm-linux_amd64.2.3.2.deb && dpkg -i gcm-linux_amd64.2.3.2.deb && git-credential-manager configure && rm gcm-linux_amx64.2.3.2.deb
   tags:
     - core
