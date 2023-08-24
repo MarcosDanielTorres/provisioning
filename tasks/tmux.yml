@@ -1,0 +1,12 @@
+- name: install tmux
+  apt:
+    name: tmux
+  tags:
+  - tmux
+
+- name: install tmux plugin manager (tpm)
+  git:
+    repo: 'https://github.com/tmux-plugins/tpm'
+    dest: "~/.tmux/plugins/tpm"
+  tags:
+  - tmux

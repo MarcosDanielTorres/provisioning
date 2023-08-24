@@ -1,0 +1,60 @@
+- hosts: localhost
+  vars:
+    source_key: "./.ssh/id_rsa"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    personal: "{{ lookup('env', 'HOME') }}/personal"
+  pre_tasks:
+    - name: update cache
+      become: true
+      apt:
+        update_cache: true 
+      tags:
+        - core
+        - dotfiles
+        - zsh
+        - node
+        - rust
+        - tmux
+        - nvim
+  tasks:
+    - name: "Include core tasks"
+      include_tasks: 
+        file: tasks/core.yml
+      tags:
+        - core
+    - name: "include zsh tasks"
+      include_tasks: 
+        file: tasks/zsh.yml
+      tags:
+        - zsh
+    - name: "Include dotfiles"
+      include_tasks:
+        file: tasks/dotfiles.yml
+      tags:
+        - dotfiles
+    - name: "include node tasks"
+      include_tasks:
+        file: tasks/node.yml
+      tags:
+        - node
+    - name: "include tmux tasks"
+      include_tasks:
+        file: tasks/tmux.yml
+      tags:
+        - tmux
+    - name: "include rust tasks"
+      include_tasks: 
+        file: tasks/rust.yml
+      tags:
+        - rust
+          #- name: "include ssh"
+          #  include_tasks:
+          #    file: tasks/ssh.yml
+          #  tags:
+          #    - ssh
+    - name: "Include nvim"
+      include_tasks:
+        file: tasks/nvim.yml
+      tags:
+        - nvim
+
